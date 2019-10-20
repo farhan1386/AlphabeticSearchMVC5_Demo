@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+<table id="example" class="table table-bordered">
+    <thead class="thead-dark text-uppercase text-white">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var table = $('#example').DataTable({
+            lengthChange: false,
+            buttons: ['copy', 'excel', 'pdf', 'colvis'],
+            "ajax": {
+                "url": "/Home/GetCustomer",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "FirstName" },
+                { "data": "LastName" },
+                { "data": "City" },
+                { "data": "Country" },
+                { "data": "Phone" }
+            ]
+        });
+
+        table.buttons().container()
+            .appendTo('#example_wrapper .col-md-6:eq(0)');
+    });
+</script>
